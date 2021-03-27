@@ -1,0 +1,13 @@
+my:
+  custom:
+    property: Hello from application properties
+---
+
+spring:
+  profiles:
+    active:jaz
+  main:
+    bannder-mode: off
+  my:
+    custom:
+      property: Hello from application-JAZ properties
