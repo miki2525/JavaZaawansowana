@@ -10,7 +10,7 @@ public class Pojo {
     private Integer field3;
     @Value("${my.custom.property}")
     private String text;
-    @Value("${my.custom:default value}")
+    @Value("${my.custom.property:default value}")
     private String textDefault;
 
     public Pojo(Integer field1, Integer field2, Integer field3) {
