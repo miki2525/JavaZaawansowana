@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/homework")
-public class HomeWorkController {
+public class HomeworkController {
 
     @GetMapping("/get/{value}")
     public ResponseEntity<String> passValueByPath(@PathVariable ("value") String str){
