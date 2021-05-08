@@ -40,12 +40,12 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public ResponseEntity<Movie> createNewMovie(@RequestBody Movie movie){
+    public ResponseEntity<List<Movie>> createNewMovie(@RequestBody Movie movie){
         if (movie.getId() instanceof Long &&
         movie.getName() instanceof String &&
         movie.getCategory() instanceof MovieCategory) {
-
-            return ResponseEntity.ok(movie);
+            movieService.addMovie(movie);
+            return ResponseEntity.ok(movieService.getAllMovies());
         }
         else {
             return ResponseEntity.notFound().build();

@@ -27,6 +27,10 @@ public class MovieService {
                 .findAny();
     }
 
+    public void addMovie(Movie movie){
+        movieList.add(movie);
+    }
+
     public Boolean deleteById(Long id){
         Optional<Movie> movie = getMovieById(id);
         if (movie.isPresent()){
