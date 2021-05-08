@@ -8,6 +8,8 @@ public class Movie {
     String name;
     MovieCategory category;
 
+    public Movie(){};
+
     public Movie(Long id, String name, MovieCategory category) {
         this.id = id;
         this.name = name;
