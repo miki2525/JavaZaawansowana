@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/movieservice")
+@RequestMapping("/moviesController")
 public class MovieController {
 
    private final MovieService movieService;
