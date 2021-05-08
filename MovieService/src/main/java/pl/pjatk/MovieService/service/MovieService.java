@@ -34,7 +34,7 @@ public class MovieService {
     public Boolean deleteById(Long id){
         Optional<Movie> movie = getMovieById(id);
         if (movie.isPresent()){
-            movieList.remove(movie);
+            movieList.remove(movie.get());
             return true;
         }
         return false;
