@@ -1,11 +1,17 @@
 package pl.pjatk.MovieService.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
+
+    @Enumerated(EnumType.STRING)
     MovieCategory category;
 
     public Movie(){};

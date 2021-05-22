@@ -1,42 +1,47 @@
 package pl.pjatk.MovieService.service;
 
+import exception.MovieNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.pjatk.MovieService.model.Movie;
-import pl.pjatk.MovieService.model.MovieCategory;
+import pl.pjatk.MovieService.repository.MovieRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieService {
+    private MovieRepository movieRepository;
 
-    private List<Movie> movieList = new ArrayList<>(List.of(
-                new Movie(1l, "Scream", MovieCategory.Horror),
-                new Movie(2l, "SpaceJam", MovieCategory.Comedy),
-                new Movie(3l, "LordOfTheRings", MovieCategory.Fantasy),
-                new Movie(4l, "XXX", MovieCategory.Action)));
-
-    public List<Movie> getAllMovies(){
-        return movieList;
+    public MovieService(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
-    public Optional<Movie> getMovieById(Long id){
-        return movieList.stream()
-                .filter(movie -> movie.getId() == id)
-                .findAny();
+    public List<Movie> getAllMovies(){
+        return movieRepository.findAll();
+    }
+
+    public Movie getMovieById(Long id) throws MovieNotFoundException {
+        return movieRepository.findById(id)
+                .orElseThrow(MovieNotFoundException::new);
     }
 
     public void addMovie(Movie movie){
-        movieList.add(movie);
+        movieRepository.save(movie);
     }
 
-    public Boolean deleteById(Long id){
-        Optional<Movie> movie = getMovieById(id);
-        if (movie.isPresent()){
-            movieList.remove(movie.get());
-            return true;
-        }
-        return false;
+    public void deleteById(Long id){
+        movieRepository.deleteById(id);
     }
+
+    public void delete(Long id){
+        movieRepository.deleteById(id);
+    }
+
+    public Movie updateMovie(Movie movie){
+        if(movieRepository.existsById(movie.getId())){
+             return movieRepository.save(movie);}
+            else {
+                throw new RuntimeException();
+            }
+    }
+
 }

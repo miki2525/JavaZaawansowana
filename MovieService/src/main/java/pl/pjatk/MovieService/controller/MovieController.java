@@ -1,6 +1,7 @@
 package pl.pjatk.MovieService.controller;
 
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +30,8 @@ public class MovieController {
 
 
     @GetMapping ("/movies/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable Long id){
-        Optional<Movie> movie = movieService.getMovieById(id);
-        if (movie.isPresent()){
-            return ResponseEntity.ok(movie.get());
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
+            return ResponseEntity.ok(movieService.getMovieById(id));
     }
 
     @PostMapping("/movies")
@@ -50,27 +45,17 @@ public class MovieController {
         else {
             return ResponseEntity.notFound().build();
         }
-        /////if cannot persist to db return 404
     }
 
     @PutMapping ("/movies/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie updateMovie) {
-        Optional<Movie> movie = movieService.getMovieById(id);
-        if (movie.isPresent()) {
-            movie.get().setName(updateMovie.getName());
-            movie.get().setCategory(updateMovie.getCategory());
-            return ResponseEntity.ok(movie.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            return ResponseEntity.ok(movieService.updateMovie(updateMovie));
     }
 
     @DeleteMapping("/movies/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
-        if (movieService.deleteById(id)){
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        else return ResponseEntity.notFound().build();
+        movieService.deleteById(id);
+       return new ResponseEntity<Void>(HttpStatus.GONE);
     }
 
 
