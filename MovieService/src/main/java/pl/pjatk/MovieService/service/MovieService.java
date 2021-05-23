@@ -1,6 +1,6 @@
 package pl.pjatk.MovieService.service;
 
-import exception.MovieNotFoundException;
+import pl.pjatk.MovieService.exception.MovieNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.pjatk.MovieService.model.Movie;
 import pl.pjatk.MovieService.repository.MovieRepository;
