@@ -24,20 +24,17 @@ public class MovieService {
                 .orElseThrow(MovieNotFoundException::new);
     }
 
-    public void addMovie(Movie movie){
-        movieRepository.save(movie);
+    public Movie addMovie(Movie movie){
+       return movieRepository.save(movie);
     }
 
     public void deleteById(Long id){
         movieRepository.deleteById(id);
     }
 
-    public void delete(Long id){
-        movieRepository.deleteById(id);
-    }
 
-    public Movie updateMovie(Movie movie){
-        if(movieRepository.existsById(movie.getId())){
+    public Movie updateMovie(Long id, Movie movie){
+        if(movieRepository.existsById(id)){
              return movieRepository.save(movie);}
             else {
                 throw new RuntimeException();

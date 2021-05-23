@@ -9,11 +9,12 @@ import pl.pjatk.MovieService.model.Movie;
 import pl.pjatk.MovieService.model.MovieCategory;
 import pl.pjatk.MovieService.service.MovieService;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/moviesController")
+@RequestMapping("/movieController")
 public class MovieController {
 
    private final MovieService movieService;
@@ -35,27 +36,28 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public ResponseEntity<List<Movie>> createNewMovie(@RequestBody Movie movie){
-        if (movie.getId() instanceof Long &&
-        movie.getName() instanceof String &&
-        movie.getCategory() instanceof MovieCategory) {
-            movieService.addMovie(movie);
-            return ResponseEntity.ok(movieService.getAllMovies());
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Movie> createNewMovie(@RequestBody Movie movie){
+
+            return ResponseEntity.ok(movieService.addMovie(movie));
+
     }
 
     @PutMapping ("/movies/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie updateMovie) {
-            return ResponseEntity.ok(movieService.updateMovie(updateMovie));
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie updateMovie) throws RuntimeException {
+            return ResponseEntity.ok(movieService.updateMovie(id, updateMovie));
     }
 
     @DeleteMapping("/movies/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
         movieService.deleteById(id);
        return new ResponseEntity<Void>(HttpStatus.GONE);
+    }
+
+    @PutMapping("/changeAvailable")
+    public ResponseEntity<Movie> changeAvailable(@RequestBody Movie movie){
+        movie.setAvailable(true);
+        movieService.updateMovie(movie.getId(), movie);
+        return ResponseEntity.ok(movie);
     }
 
 

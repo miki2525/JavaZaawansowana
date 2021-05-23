@@ -1,5 +1,7 @@
 package pl.pjatk.MovieService.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,10 +11,15 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     String name;
 
     @Enumerated(EnumType.STRING)
     MovieCategory category;
+
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    Boolean isAvailable = false;
 
     public Movie(){};
 
@@ -20,6 +27,12 @@ public class Movie {
         this.id = id;
         this.name = name;
         this.category = category;
+    }
+
+    public Movie(String name, MovieCategory category, Boolean isAvailable) {
+        this.name = name;
+        this.category = category;
+        this.isAvailable = isAvailable;
     }
 
     public Movie(String name, MovieCategory category) {
@@ -51,25 +64,21 @@ public class Movie {
         this.category = category;
     }
 
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category=" + category +
+                ", isAvailable=" + isAvailable +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(name, movie.name) && category == movie.category;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, category);
     }
 }
