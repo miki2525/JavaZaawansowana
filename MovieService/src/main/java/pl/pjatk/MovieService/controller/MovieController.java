@@ -61,5 +61,13 @@ public class MovieController {
         return ResponseEntity.ok(movie);
     }
 
+    @PutMapping("/changeAvailableFalse/{id}")
+    public ResponseEntity<Movie> changeAvailableFalse(@PathVariable Long id){
+        Movie movie = movieService.getMovieById(id);
+        movie.setAvailable(false);
+        movieService.updateMovie(movie.getId(), movie);
+        return ResponseEntity.ok(movie);
+    }
+
 
 }

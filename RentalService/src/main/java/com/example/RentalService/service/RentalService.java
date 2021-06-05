@@ -25,4 +25,9 @@ public class RentalService {
         String urlRequest = "http://localhost:8080/movieController/changeAvailable/";
         restTemplate.put(urlRequest + id, Movie.class);
     }
+
+    public void rentMovie(Long id){
+        String urlRequest = "http://localhost:8080/movieController/changeAvailableFalse/";
+        restTemplate.put(urlRequest + id, Movie.class);
+    }
 }

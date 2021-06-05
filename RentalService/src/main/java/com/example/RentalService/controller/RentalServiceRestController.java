@@ -25,5 +25,10 @@ public ResponseEntity<Movie> getMyMovie(@PathVariable Long id){
         rentalService.returnMovie(id);
         return  ResponseEntity.ok(rentalService.getMovie(id));
     }
+    @PutMapping("/setAvailableFalse/{id}")
+    public ResponseEntity<Movie> setAvailableFalse(@PathVariable Long id){
+        rentalService.rentMovie(id);
+        return  ResponseEntity.ok(rentalService.getMovie(id));
+    }
 
 }
