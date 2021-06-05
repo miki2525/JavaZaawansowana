@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class RentalServiceRestController {
 
-    RentalService rentalService;
+    private RentalService rentalService;
 
     public RentalServiceRestController(RentalService rentalService){
         this.rentalService = rentalService;

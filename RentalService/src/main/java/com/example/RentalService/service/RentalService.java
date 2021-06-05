@@ -9,9 +9,12 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class RentalService {
 
-    @Autowired
-    RestTemplate restTemplate;
 
+    private RestTemplate restTemplate;
+
+    public RentalService(RestTemplate restTemplate){
+        this.restTemplate = restTemplate;
+    }
 
     public Movie getMovie(Long id){
         String urlRequest = "http://localhost:8080/movieController/movies/";
