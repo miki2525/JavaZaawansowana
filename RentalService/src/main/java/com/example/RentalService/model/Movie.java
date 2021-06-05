@@ -4,15 +4,15 @@ package com.example.RentalService.model;
 public class Movie {
 
 
-    Long id;
+    private Long id;
 
-    String name;
-
-
-    MovieCategory category;
+    private String name;
 
 
-    Boolean isAvailable = false;
+    private MovieCategory category;
+
+
+    private Boolean isAvailable = false;
 
     public Movie(){};
 

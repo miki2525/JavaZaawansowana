@@ -53,8 +53,9 @@ public class MovieController {
        return new ResponseEntity<Void>(HttpStatus.GONE);
     }
 
-    @PutMapping("/changeAvailable")
-    public ResponseEntity<Movie> changeAvailable(@RequestBody Movie movie){
+    @PutMapping("/changeAvailable/{id}")
+    public ResponseEntity<Movie> changeAvailable(@PathVariable Long id){
+        Movie movie = movieService.getMovieById(id);
         movie.setAvailable(true);
         movieService.updateMovie(movie.getId(), movie);
         return ResponseEntity.ok(movie);

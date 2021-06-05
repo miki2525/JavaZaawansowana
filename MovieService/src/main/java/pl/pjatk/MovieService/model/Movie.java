@@ -10,16 +10,16 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+   private String name;
 
     @Enumerated(EnumType.STRING)
-    MovieCategory category;
+   private MovieCategory category;
 
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
-    Boolean isAvailable = false;
+   private Boolean isAvailable = false;
 
     public Movie(){};
 
