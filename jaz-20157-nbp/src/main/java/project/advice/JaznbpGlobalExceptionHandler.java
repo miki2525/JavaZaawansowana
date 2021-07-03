@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import project.exception.jaznbpBadRequest;
+import project.exception.jaznbpInternalProblem;
 import project.exception.jaznbpNotFoundException;
 
 
@@ -25,6 +26,13 @@ public class JaznbpGlobalExceptionHandler {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("Not found");
+    }
+
+    @ExceptionHandler(jaznbpInternalProblem.class)
+    public ResponseEntity<String> handleMovieNotFoundException(jaznbpInternalProblem e){
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("BOOOM NULL");
     }
 
 }

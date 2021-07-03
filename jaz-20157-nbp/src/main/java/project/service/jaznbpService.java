@@ -3,6 +3,7 @@ package project.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import project.exception.jaznbpBadRequest;
+import project.exception.jaznbpInternalProblem;
 import project.exception.jaznbpNotFoundException;
 import project.model.Root;
 import project.model.jaznbp;
@@ -22,6 +23,9 @@ public class jaznbpService {
     }
 
     public jaznbp saveLog(jaznbp jaznbp){
+        if (jaznbp == null){
+            throw new jaznbpInternalProblem();
+        }
         return jaznbpRepository.save(jaznbp);
     }
 

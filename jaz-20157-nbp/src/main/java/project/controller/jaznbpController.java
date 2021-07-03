@@ -2,6 +2,8 @@ package project.controller;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.model.jaznbp;
@@ -23,7 +25,11 @@ public class jaznbpController {
         this.jaznbpService = jaznbpService;
     }
 
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 40x, message = "Not found"),
+            @ApiResponse(code = 50x, message = "BOOM NULL")
+    })
     @ApiOperation(value = "Pokaż średnią kursu między wybranymi datami", notes = "Podaj walutę oraz zakres dat")
     @GetMapping("/{waluta}")
     public ResponseEntity<Double> getKurs(@ApiParam(value = "Wybrana waluta",
