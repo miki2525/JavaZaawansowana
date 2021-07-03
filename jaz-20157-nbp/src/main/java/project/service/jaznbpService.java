@@ -1,10 +1,12 @@
 package project.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import project.model.Root;
 
 import java.time.LocalDate;
 
+@Service
 public class jaznbpService {
 
     private RestTemplate restTemplate;
@@ -14,8 +16,8 @@ public class jaznbpService {
         this.restTemplate = restTemplate;
     }
 
-    public Double getAvRate(String waluta, LocalDate start){
-        String url = "http://api.nbp.pl/api/exchangerates/rates/a/gbp/2012-01-01/2012-01-31/" + waluta + "/last/" + start;
+    public Double getKurs(String waluta, String start, String koniec){
+        String url = "http://api.nbp.pl/api/exchangerates/rates/a/" + waluta +"/" + start + "/" + koniec +"/";
         Root root = restTemplate.getForObject(url, Root.class);
 
         return root.getRates()
