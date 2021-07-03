@@ -27,8 +27,8 @@ public class jaznbpController {
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 40x, message = "Not found"),
-            @ApiResponse(code = 50x, message = "BOOM NULL")
+            @ApiResponse(code = 404, message = "Not found"),
+            @ApiResponse(code = 500, message = "BOOM NULL")
     })
     @ApiOperation(value = "Pokaż średnią kursu między wybranymi datami", notes = "Podaj walutę oraz zakres dat")
     @GetMapping("/{waluta}")
