@@ -1,3 +1,6 @@
+//////// FOR OLD JAVA VERSION
+
+
 package project.util.converter;
 
 import javax.persistence.AttributeConverter;

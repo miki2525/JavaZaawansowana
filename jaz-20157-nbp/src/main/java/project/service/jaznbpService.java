@@ -2,6 +2,8 @@ package project.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import project.exception.jaznbpBadRequest;
+import project.exception.jaznbpNotFoundException;
 import project.model.Root;
 import project.model.jaznbp;
 import project.repository.jaznbpRepository;
@@ -25,8 +27,15 @@ public class jaznbpService {
 
 
     public Double getKurs(String waluta, String start, String koniec){
+        if(!start.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2}") || !koniec.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2}")){
+            throw new jaznbpBadRequest();
+        }
         String url = "http://api.nbp.pl/api/exchangerates/rates/a/" + waluta +"/" + start + "/" + koniec +"/";
         Root root = restTemplate.getForObject(url, Root.class);
+
+        if (root==null || root.getRates().isEmpty()){
+            throw new jaznbpNotFoundException();
+        }
 
         return root.getRates()
                 .stream()

@@ -1,5 +1,7 @@
 package project.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.model.jaznbp;
@@ -22,10 +24,12 @@ public class jaznbpController {
     }
 
 
-
+    @ApiOperation(value = "Pokaż średnią kursu między wybranymi datami", notes = "Podaj walutę oraz zakres dat")
     @GetMapping("/{waluta}")
-    public ResponseEntity<Double> getKurs(@PathVariable String waluta, @RequestParam("start") String datastartstr,
-                                  @RequestParam("koniec") String datakoniecstr){
+    public ResponseEntity<Double> getKurs(@ApiParam(value = "Wybrana waluta",
+            example = "eur")@PathVariable String waluta, @ApiParam(value = "Data początek",
+            example = "2012-05-05")@RequestParam("start") String datastartstr, @ApiParam(value = "Data koniec",
+            example = "2012-05-07") @RequestParam("koniec") String datakoniecstr){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         LocalDate datastart = LocalDate.parse(datastartstr, dtf);
