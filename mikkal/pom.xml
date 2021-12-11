@@ -16,6 +16,36 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>jaz</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profile.from.maven>jaz</spring.profile.from.maven>
+			</properties>
+			<dependencies>
+				<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>8.0.27</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>true</id>
+			<activation>
+			</activation>
+			<properties>
+				<spring.profile.from.maven>BRAKBAZYDANYCH</spring.profile.from.maven>
+			</properties>
+		</profile>
+	</profiles>
+
+
 	<dependencies>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
@@ -39,6 +69,12 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

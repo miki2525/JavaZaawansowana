@@ -1,13 +1,19 @@
 package pl.pjatk.mikkal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 class AppConfig {
+
+    @Autowired
+    Environment environment;
 
 @ConditionalOnProperty(value = "create.the.bean",
                         havingValue = "true",
@@ -15,6 +21,7 @@ class AppConfig {
     @Bean
     public Pojo pojo(){
     System.out.println("Call me Mr. TrueBean");
+    System.out.println(Arrays.toString(environment.getActiveProfiles()));
     return new Pojo(1, 2, 3);
 }
         ///zad 2 27.03
